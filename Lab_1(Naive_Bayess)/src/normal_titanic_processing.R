@@ -14,7 +14,8 @@ titanic_test <- read.csv(test_name, sep = ",")
 titanic_train <- read.csv(train_name, sep = ",")
 model <- naiveBayes(Survived ~., data = titanic_train)
 prediction_titanic <- predict(model, titanic_test)
-titanic_table <- table(prediction_titanic, titanic_test$Survived)
+prop.table(table(titanic_train$Survived))
+prop.table(table(prediction_titanic))
 
 # normal distributions
 
