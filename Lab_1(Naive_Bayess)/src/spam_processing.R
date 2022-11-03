@@ -130,8 +130,8 @@ ggsave("nonspam_pr.jpg")
 for (size in seq(0.1, 0.9, by = 0.1)){
   print(paste0("При доле выборки в ", as.character(size)))
   size_df <- filter(pr_df, resample == as.character(size))
-  auc_spam <- pr_auc(size_df, true, spam_)
-  auc_nonspam <- pr_auc(size_df, true, nonspam_)
+  auc_spam <- pr_auc(size_df, true, spam)
+  auc_nonspam <- pr_auc(size_df, true, nonspam)
   print(paste0("Для спама: auc == ", auc_spam$.estimate))
   print(paste0("Для НЕ спама: auc == ", auc_nonspam$.estimate))
 }
