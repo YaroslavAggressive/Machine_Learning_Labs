@@ -60,7 +60,7 @@ for (kernel in kernels){
     theme(legend.background = element_rect(fill="cyan",
                                            size=0.5, linetype="longdash",
                                            colour ="darkblue"))
-  ggsave(paste0(kernel, "_tic_tac_accuracy.jpg"))
+  ggsave(paste0("accuracy/", kernel, "_tic_tac_accuracy.jpg"))
 }
 
 test_factors <- seq(0.1, 0.9, by=0.1)
@@ -126,7 +126,8 @@ for (kernel in kernels){
     theme(legend.background = element_rect(fill="lightblue",
                                            size=0.5, linetype="solid",
                                            colour ="darkblue")) 
-  ggsave(paste0(kernel, "_tic_tac_positive_roc.jpg"))
+  ggsave(paste0("roc/", kernel, "_tic_tac_positive_roc.jpg"))
+  
   plt_negative <- ggroc(negatives_lst, legacy.axes = TRUE) + 
     ggtitle(paste0("ROC-curves for classfication negative game results for kernel ", kernel)) +
     labs(x = "1 - Specificity",
@@ -137,7 +138,7 @@ for (kernel in kernels){
                                            colour ="darkblue")) +
     geom_abline(intercept = 1, slope = 1, color = 'grey', size = 0.5,
                 linetype = "dashed")
-  ggsave(paste0(kernel, "_tic_tac_negative_roc.jpg"))
+  ggsave(paste0("roc/", kernel, "_tic_tac_negative_roc.jpg"))
   
   #Recall-Precision
   pr_df <- data.frame()
@@ -155,13 +156,13 @@ for (kernel in kernels){
     group_by(resample) %>%
     pr_curve(true, positive) %>%
     autoplot() + labs(title = paste0("PR-curve for positives results for kernel ", kernel))
-  ggsave(paste0(kernel, "_tic_tac_positive_pr.jpg"))
+  ggsave(paste0("pr/", kernel, "_tic_tac_positive_pr.jpg"))
   
   pr_df %>%
     group_by(resample) %>%
     pr_curve(true, negative) %>%
     autoplot() + labs(title = paste0("PR-curve for negatives results for kernel ", kernel))
-  ggsave(paste0(kernel, "_tic_tac_negative_pr.jpg"))
+  ggsave(paste0("pr/", kernel, "_tic_tac_negative_pr.jpg"))
   
   for (size in seq(0.1, 0.9, by = 0.1)){
     print(paste0("При доле выборки в ", as.character(size), " при ядре ", kernel))
