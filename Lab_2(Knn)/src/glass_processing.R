@@ -35,15 +35,9 @@ for (kernel in kernels){
   result[[kernel]] <- kernel_k_accuracy
 }
 
-for (kernel in kernels){
-  
-}
-result
-glass
-
 # dependence of distance-parameter on classification accuracy
 
-distances <- seq(1, 25, by = 1)
+distances <- seq(1, 10, by = 1)
 
 # finding dependence of each factor on classification error
 
@@ -84,3 +78,10 @@ ggsave("factors_bar.jpg")
 # test classification of one glass element
 test_example <- data.frame(RI = 1.516, Na = 11.7, Mg = 1.01, Al = 1.19, 
                            Si = 72.59, K = 0.43, Ca = 11.44, Ba = 0.02, Fe = 0.1)
+
+for (kernel in kernels){
+  example_class <- kknn(Type ~., glass, test_example, kernel = kernel, 
+                        distance = 2)
+  print(paste0("Accroding to knn classification of glass types with kernel ",
+               kernel, " example class is ", example_class))
+} 

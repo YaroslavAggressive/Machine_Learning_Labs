@@ -13,7 +13,7 @@ A_raw <- read.table(tic_tac_name, sep = ",")
 A_raw$V10 <- as.factor(tic_tac$V10)
 A_size <- dim(tic_tac)[1]
 
-kernels = c("triangular", "rectangular", "epanechnikov", "optimal")
+kernels = c("triangular", "rectangular", "epanechnikov", "gaussian")
 factor_sizes <- seq(0.1, 0.9, by = 0.05)
 
 kernel_accuracy <- c()
@@ -54,7 +54,7 @@ for (kernel in kernels){
     geom_line() +
     geom_point() + 
     theme_dark() +
-    labs(x = "Part of all messages in training sample", 
+    labs(x = "Part of games in training sample", 
          y = "Minimal misclassification value",
          title = "Dependence of classification error on test sample size") +
     theme(legend.background = element_rect(fill="cyan",
